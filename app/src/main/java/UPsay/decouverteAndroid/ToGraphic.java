@@ -3,6 +3,10 @@ package UPsay.decouverteAndroid;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -18,6 +22,9 @@ public class ToGraphic extends View{
     float xText, yText;
     float size;
     float x1, x2, y1, y2;
+    private	 int pencheH, pencheV, penche ;
+
+    Sensor accelerometre;
     Handler timerHandler = new Handler();
     Runnable updateTimerThread = new Runnable() {
         public void run() {
@@ -33,7 +40,27 @@ public class ToGraphic extends View{
         size=100;
         timerHandler.postDelayed(updateTimerThread, 10);
         setOnTouchListener(onTouchListener);
+        SensorManager	m	=	(SensorManager)	context.getSystemService(Context.SENSOR_SERVICE);
+        accelerometre	=	m.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        m.registerListener(mSensorEventListener,	accelerometre, SensorManager.SENSOR_DELAY_UI);
     }
+
+    final	SensorEventListener	mSensorEventListener	=	new
+            SensorEventListener()	{
+                @Override
+                public	void	onAccuracyChanged(Sensor	sensor,	int	accuracy)	{
+                }
+                @Override
+                public	void	onSensorChanged(SensorEvent sensorEvent)	{
+                    //	Que	faire	en	cas	d'évènements	sur	le	capteur	?
+                    pencheH	=	-(int)(sensorEvent.values[0]);
+                    pencheV	=	(int)(sensorEvent.values[1]);
+                   // penche	= pencheH*pencheH+pencheV*pencheV;
+                    xText+=pencheH;
+                    yText+=pencheV;
+                    invalidate();
+                }
+            };
 
     public void setXYText (float x, float y){
         xText=x;
