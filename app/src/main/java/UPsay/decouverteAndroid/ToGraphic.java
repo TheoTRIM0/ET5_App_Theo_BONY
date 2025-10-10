@@ -102,14 +102,8 @@ public class ToGraphic extends View{
                 }
             }
             invalidate();
-            return false;
+            return true;
         }
-        public void setXYText (float x, float y) {
-            xText = x;
-            yText = y;
-        }
-
     };
-    //
 }
 
