@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ET5_App</string>
+    <string name="button">Button</string>
+    <string name="textview">TextView</string>
+    <string name="button2">Button</string>
+    <string name="on_off">on_off</string>
+</resources>
