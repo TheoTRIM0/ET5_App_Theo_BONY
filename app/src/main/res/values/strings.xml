@@ -4,4 +4,6 @@
     <string name="textview">TextView</string>
     <string name="button2">Button</string>
     <string name="on_off">on_off</string>
+    <string name="textview1">TextView</string>
+    <string name="button1">Button</string>
 </resources>
